@@ -158,7 +158,7 @@ class BaseOC_Context_Module(nn.Module):
         self.stages = []
         self.stages = nn.ModuleList([self._make_stage(in_channels, out_channels, key_channels, value_channels, size) for size in sizes])
         self.conv_bn_dropout = nn.Sequential(
-            nn.Conv2d(in_channels, out_channels, kernel_size=1, padding=0),
+            nn.Conv2d(out_channels, out_channels, kernel_size=1, padding=0),
             InPlaceABNSync(out_channels),
             )
 
