@@ -72,18 +72,18 @@ class _PyramidSelfAttentionBlock(nn.Module):
     def forward(self, x):
         batch_size, c, h, w = x.size(0), x.size(1), x.size(2), x.size(3)
 
-        local_x = []
+        local_x = [] #是个list诶
         local_y = []
-        step_h, step_w = h//self.scale, w//self.scale
-        for i in range(0, self.scale):
-            for j in range(0, self.scale):
-                start_x, start_y = i*step_h, j*step_w
-                end_x, end_y = min(start_x+step_h, h), min(start_y+step_w, w)
-                if i == (self.scale-1):
+        step_h, step_w = h//self.scale, w//self.scale #步长 地板除
+        for i in range(0, self.scale): #h
+            for j in range(0, self.scale): #w
+                start_x, start_y = i*step_h, j*step_w #从0开始
+                end_x, end_y = min(start_x+step_h, h), min(start_y+step_w, w) #min的话，应该是求整数舍去余数
+                if i == (self.scale-1): #？？
                     end_x = h
                 if j == (self.scale-1):
                     end_y = w          
-                local_x += [start_x, end_x]
+                local_x += [start_x, end_x] 
                 local_y += [start_y, end_y]
 
         value = self.f_value(x)
@@ -91,11 +91,11 @@ class _PyramidSelfAttentionBlock(nn.Module):
         key = self.f_key(x)
 
         local_list = []
-        local_block_cnt = 2*self.scale*self.scale
+        local_block_cnt = 2*self.scale*self.scale #why 2？
         for i in range(0, local_block_cnt, 2):
             value_local = value[:,:,local_x[i]:local_x[i+1],local_y[i]:local_y[i+1]]
             query_local = query[:,:,local_x[i]:local_x[i+1],local_y[i]:local_y[i+1]]
-            key_local = key[:,:,local_x[i]:local_x[i+1],local_y[i]:local_y[i+1]]
+              key_local = key[:,:,local_x[i]:local_x[i+1],local_y[i]:local_y[i+1]]
 
             h_local, w_local = value_local.size(2), value_local.size(3)
             value_local = value_local.contiguous().view(batch_size, self.value_channels, -1)
