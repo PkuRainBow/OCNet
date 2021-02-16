@@ -25,7 +25,8 @@
 
 ## News
 
-- 2021/02/14 [openseg.pytorch](https://github.com/openseg-group/openseg.pytorch) supports **pytorch-1.7, mixed-precision, and distributed training**. Based on the [PaddleClas](https://github.com/PaddlePaddle/PaddleClas) ImageNet pretrained weights, "HRNet + OCR" achieves **82.78%** on Cityscapes val, **59.13%** on PASCAL-Context val (new SOTA) and **43.26%** on COCO-Stuff val (new SOTA). Please checkout **branch pytorch-1.7** for more details.
+- 2021/02/14 [openseg.pytorch](https://github.com/openseg-group/openseg.pytorch) supports **pytorch-1.7, mixed-precision, and distributed training**. Based on the [PaddleClas](https://github.com/PaddlePaddle/PaddleClas) ImageNet pretrained weights, we achieve **82.78%** on Cityscapes val, **59.62%** on PASCAL-Context val (**new SOTA**) and **45.20%** on COCO-Stuff val (**new SOTA**).
+
 
 - 2020/07/15
 [MMSegmentation](https://github.com/open-mmlab/mmsegmentation) also supports our OCR. We further introduce a OCR+ that augments the original OCR with separable convolutions and a decoder head following the same manner as DeepLabv3+, which achieves a strong (single-scale evaluation) performance 81.0% on Cityscapes val set.
